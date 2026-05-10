@@ -1,7 +1,6 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "framework": "other",
   "functions": {
     "api/index.js": {
       "runtime": "nodejs20.x",
@@ -13,9 +12,5 @@
       "source": "/(.*)",
       "destination": "/api"
     }
-  ],
-  "regions": ["auto"],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
