@@ -1,0 +1,22 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+mellocoin_protocol = "MeLLoXkB3v3VJk2A1mEJC8hQqKqkPkS9qLZxZmL5cKp"
+
+[programs.devnet]
+mellocoin_protocol = "MeLLoXkB3v3VJk2A1mEJC8hQqKqkPkS9qLZxZmL5cKp"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[workspace]
+members = ["programs/mellocoin_protocol"]

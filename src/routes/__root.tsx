@@ -108,12 +108,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { ClientOnly } from "@/components/ClientOnly";
+import { SolanaProviders } from "@/components/solana/SolanaProviders";
+import { Toaster } from "@/components/ui/sonner";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <ClientOnly fallback={<Outlet />}>
+        <SolanaProviders>
+          <Outlet />
+          <Toaster richColors position="top-right" />
+        </SolanaProviders>
+      </ClientOnly>
     </QueryClientProvider>
   );
 }
