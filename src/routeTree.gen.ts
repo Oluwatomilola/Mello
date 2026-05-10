@@ -9,38 +9,128 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TipRouteImport } from './routes/tip'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as EscrowRouteImport } from './routes/escrow'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TipSlugRouteImport } from './routes/tip.$slug'
 
+const TipRoute = TipRouteImport.update({
+  id: '/tip',
+  path: '/tip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscrowRoute = EscrowRouteImport.update({
+  id: '/escrow',
+  path: '/escrow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TipSlugRoute = TipSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TipRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/escrow': typeof EscrowRoute
+  '/settings': typeof SettingsRoute
+  '/tip': typeof TipRouteWithChildren
+  '/tip/$slug': typeof TipSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/escrow': typeof EscrowRoute
+  '/settings': typeof SettingsRoute
+  '/tip': typeof TipRouteWithChildren
+  '/tip/$slug': typeof TipSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/escrow': typeof EscrowRoute
+  '/settings': typeof SettingsRoute
+  '/tip': typeof TipRouteWithChildren
+  '/tip/$slug': typeof TipSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/escrow'
+    | '/settings'
+    | '/tip'
+    | '/tip/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/dashboard' | '/escrow' | '/settings' | '/tip' | '/tip/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/escrow'
+    | '/settings'
+    | '/tip'
+    | '/tip/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  EscrowRoute: typeof EscrowRoute
+  SettingsRoute: typeof SettingsRoute
+  TipRoute: typeof TipRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tip': {
+      id: '/tip'
+      path: '/tip'
+      fullPath: '/tip'
+      preLoaderRoute: typeof TipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escrow': {
+      id: '/escrow'
+      path: '/escrow'
+      fullPath: '/escrow'
+      preLoaderRoute: typeof EscrowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +138,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tip/$slug': {
+      id: '/tip/$slug'
+      path: '/$slug'
+      fullPath: '/tip/$slug'
+      preLoaderRoute: typeof TipSlugRouteImport
+      parentRoute: typeof TipRoute
+    }
   }
 }
 
+interface TipRouteChildren {
+  TipSlugRoute: typeof TipSlugRoute
+}
+
+const TipRouteChildren: TipRouteChildren = {
+  TipSlugRoute: TipSlugRoute,
+}
+
+const TipRouteWithChildren = TipRoute._addFileChildren(TipRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  EscrowRoute: EscrowRoute,
+  SettingsRoute: SettingsRoute,
+  TipRoute: TipRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
