@@ -17,6 +17,36 @@ Mellocoin turns natural-language intent ("send Alex 0.5 SOL on Friday", "lock 2 
 
 ---
 
+## 🌉 LI.FI Cross-Chain Integration
+
+### Why This Matters
+Users should not need to manually bridge before using Solana apps. Mellocoin solves this UX friction by deeply integrating LI.FI, allowing users to start on any EVM chain, bridge seamlessly, and instantly use Solana-native payment and creator experiences.
+
+### Supported Chains
+- **Ethereum**
+- **Base**
+- **Arbitrum**
+- **Polygon**
+- **Optimism**
+- **BSC**
+- **Solana**
+
+### Cross-Chain User Flow
+`EVM Wallet → LI.FI Route / Swap → Solana → Mellocoin Escrow / Tip Jar`
+
+1. User opens Mellocoin and connects MetaMask (EVM) or Phantom (Solana).
+2. User chooses a source chain and token.
+3. LI.FI SDK / Widget fetches the best, real-time routes.
+4. User executes the bridge/swap transaction natively in the app.
+5. Assets arrive as SOL or USDC on Solana.
+6. User can instantly utilize Mellocoin features.
+
+### Integrations Used
+- **LI.FI SDK (`@lifi/sdk`)**: Used in the AI-Assisted Smart Router (`/routes`) to fetch, evaluate, and recommend the cheapest and fastest cross-chain routes.
+- **LI.FI Widget (`@lifi/widget`)**: Embedded with custom branding for the Cross-Chain Onboarding (`/bridge`) and Cross-Chain Checkout (`/pay`) flows to handle real bridging and transaction execution securely.
+
+---
+
 ## 🏗 Architecture
 
 ```
@@ -164,6 +194,9 @@ Covers:
 | | |
 |---|---|
 | Landing | Hero with glassmorphism + emerald/violet gradients |
+| Cross-Chain Bridge | LI.FI Widget embedded for any-to-Solana onboarding |
+| Smart Route | AI-assisted route evaluation via `@lifi/sdk` |
+| Pay Checkout | Cross-chain payment flow to a specific Solana escrow |
 | Dashboard | Balance, SPL list, recent tx feed |
 | Escrow | Fund + memo + status timeline |
 | Tip Jar | Public `/tip/:slug` donation page |

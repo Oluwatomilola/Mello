@@ -5,9 +5,11 @@ import { Sparkles } from "lucide-react";
 
 const links = [
   { to: "/dashboard", label: "Dashboard" },
+  { to: "/bridge", label: "Bridge" },
+  { to: "/pay", label: "Pay" },
+  { to: "/routes", label: "Smart Route" },
   { to: "/escrow", label: "Escrow" },
   { to: "/tip", label: "Tip Jar" },
-  { to: "/settings", label: "Settings" },
 ];
 
 export function NavBar() {

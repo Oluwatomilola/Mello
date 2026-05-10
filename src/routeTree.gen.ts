@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TipRouteImport } from './routes/tip'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as RoutesRouteImport } from './routes/routes'
+import { Route as PayRouteImport } from './routes/pay'
 import { Route as EscrowRouteImport } from './routes/escrow'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BridgeRouteImport } from './routes/bridge'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TipSlugRouteImport } from './routes/tip.$slug'
 
@@ -26,6 +29,16 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoutesRoute = RoutesRouteImport.update({
+  id: '/routes',
+  path: '/routes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PayRoute = PayRouteImport.update({
+  id: '/pay',
+  path: '/pay',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EscrowRoute = EscrowRouteImport.update({
   id: '/escrow',
   path: '/escrow',
@@ -34,6 +47,11 @@ const EscrowRoute = EscrowRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BridgeRoute = BridgeRouteImport.update({
+  id: '/bridge',
+  path: '/bridge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,16 +67,22 @@ const TipSlugRoute = TipSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/escrow': typeof EscrowRoute
+  '/pay': typeof PayRoute
+  '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/tip': typeof TipRouteWithChildren
   '/tip/$slug': typeof TipSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/escrow': typeof EscrowRoute
+  '/pay': typeof PayRoute
+  '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/tip': typeof TipRouteWithChildren
   '/tip/$slug': typeof TipSlugRoute
@@ -66,8 +90,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bridge': typeof BridgeRoute
   '/dashboard': typeof DashboardRoute
   '/escrow': typeof EscrowRoute
+  '/pay': typeof PayRoute
+  '/routes': typeof RoutesRoute
   '/settings': typeof SettingsRoute
   '/tip': typeof TipRouteWithChildren
   '/tip/$slug': typeof TipSlugRoute
@@ -76,18 +103,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/bridge'
     | '/dashboard'
     | '/escrow'
+    | '/pay'
+    | '/routes'
     | '/settings'
     | '/tip'
     | '/tip/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/escrow' | '/settings' | '/tip' | '/tip/$slug'
+  to:
+    | '/'
+    | '/bridge'
+    | '/dashboard'
+    | '/escrow'
+    | '/pay'
+    | '/routes'
+    | '/settings'
+    | '/tip'
+    | '/tip/$slug'
   id:
     | '__root__'
     | '/'
+    | '/bridge'
     | '/dashboard'
     | '/escrow'
+    | '/pay'
+    | '/routes'
     | '/settings'
     | '/tip'
     | '/tip/$slug'
@@ -95,8 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BridgeRoute: typeof BridgeRoute
   DashboardRoute: typeof DashboardRoute
   EscrowRoute: typeof EscrowRoute
+  PayRoute: typeof PayRoute
+  RoutesRoute: typeof RoutesRoute
   SettingsRoute: typeof SettingsRoute
   TipRoute: typeof TipRouteWithChildren
 }
@@ -117,6 +162,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/routes': {
+      id: '/routes'
+      path: '/routes'
+      fullPath: '/routes'
+      preLoaderRoute: typeof RoutesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pay': {
+      id: '/pay'
+      path: '/pay'
+      fullPath: '/pay'
+      preLoaderRoute: typeof PayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escrow': {
       id: '/escrow'
       path: '/escrow'
@@ -129,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bridge': {
+      id: '/bridge'
+      path: '/bridge'
+      fullPath: '/bridge'
+      preLoaderRoute: typeof BridgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -160,8 +226,11 @@ const TipRouteWithChildren = TipRoute._addFileChildren(TipRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BridgeRoute: BridgeRoute,
   DashboardRoute: DashboardRoute,
   EscrowRoute: EscrowRoute,
+  PayRoute: PayRoute,
+  RoutesRoute: RoutesRoute,
   SettingsRoute: SettingsRoute,
   TipRoute: TipRouteWithChildren,
 }

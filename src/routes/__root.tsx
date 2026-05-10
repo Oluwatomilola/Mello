@@ -114,6 +114,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 import { ClientOnly } from "@/components/ClientOnly";
 import { SolanaProviders } from "@/components/solana/SolanaProviders";
+import { WagmiProvider } from "@/components/evm/WagmiProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 function RootComponent() {
@@ -122,10 +123,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ClientOnly fallback={<Outlet />}>
-        <SolanaProviders>
-          <Outlet />
-          <Toaster richColors position="top-right" />
-        </SolanaProviders>
+        <WagmiProvider>
+          <SolanaProviders>
+            <Outlet />
+            <Toaster richColors position="top-right" />
+          </SolanaProviders>
+        </WagmiProvider>
       </ClientOnly>
     </QueryClientProvider>
   );

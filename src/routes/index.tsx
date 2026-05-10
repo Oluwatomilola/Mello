@@ -23,12 +23,12 @@ export const Route = createFileRoute("/")({
 });
 
 const features = [
+  { icon: Sparkles, title: "Cross-Chain Bridge", desc: "Move assets directly from Ethereum, Base, or Arbitrum to Solana using LI.FI." },
+  { icon: ArrowRight, title: "Smart Routing", desc: "AI-assisted helper finds the cheapest and fastest route to fund your Solana wallet." },
   { icon: Wallet, title: "Smart Wallet", desc: "SOL + SPL balances, history, and one-click transfers via Wallet Adapter." },
   { icon: Lock, title: "Escrow Vaults", desc: "Lock funds in PDA vaults; release or refund with a single signature." },
   { icon: Coins, title: "Tip Jars", desc: "Public donation pages with on-chain memos for creators and builders." },
   { icon: Repeat, title: "Scheduled Pay", desc: "Define recurring transfer instructions stored on-chain as PDAs." },
-  { icon: MessageSquare, title: "Memo-First", desc: "Every flow attaches a category + note via the Solana Memo program." },
-  { icon: Sparkles, title: "AI-Assisted", desc: "Chat your intent — Mellocoin composes versioned transactions for you." },
 ];
 
 function Landing() {
@@ -47,28 +47,36 @@ function Landing() {
             Live on Solana Devnet
           </span>
           <h1 className="mt-6 text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-            Payments, escrow & tips —
-            <br className="hidden md:block" />
-            <span className="text-gradient-emerald">conversational</span>{" "}
-            <span className="text-gradient-violet">on Solana</span>.
+            Cross-chain onboarding &<br className="hidden md:block" />
+            <span className="text-gradient-emerald">Solana payments</span>.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground md:text-lg">
-            Mellocoin is a smart wallet that turns natural-language intent into safe on-chain
-            actions: lock funds in escrow vaults, run a public tip jar, or schedule a recurring
-            payment — without leaving the chat.
+            Mellocoin is a cross-chain payment and onboarding platform that lets you move assets from any supported EVM chain into Solana-native payment, escrow, and creator experiences seamlessly using LI.FI.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
-              to="/dashboard"
-              className="btn-hero inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold"
+              to="/bridge"
+              className="btn-hero inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold bg-emerald-600 hover:bg-emerald-500"
             >
-              Open Dashboard <ArrowRight className="h-4 w-4" />
+              Bridge to Solana <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/routes"
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white"
+            >
+              AI Smart Router
+            </Link>
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-foreground hover:bg-white/10"
+            >
+              Dashboard
             </Link>
             <a
               href="https://github.com"
               className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-foreground hover:bg-white/10"
             >
-              View on GitHub
+              GitHub
             </a>
           </div>
         </motion.section>
