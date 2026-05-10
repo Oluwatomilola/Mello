@@ -8,11 +8,14 @@
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import {nitro } from 'nitro/vite'
 import {defineConfig} from "vite"
-// Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
+import viteReact from '@vitejs/plugin-react'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+
 export default defineConfig({
   
     plugins: [
+      tanstackStart(),   
+      viteReact(),
       nitro(),
       nodePolyfills({
         include: ["buffer"],
