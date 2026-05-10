@@ -1,4 +1,4 @@
-# 🍃 Mellocoin
+# 🍃 MelloPay
 
 > Conversational, AI-assisted Solana payments — escrow vaults, tip jars, and scheduled transfers in a single smart wallet.
 
@@ -215,7 +215,7 @@ Covers:
 
 ---
 
-## 💚 Why Mellocoin is Unique
+## 💚 Why Mellopay is Unique
 
 Most Solana payment apps are form-driven. Mellocoin treats payments as **conversation primitives** — every action carries a memo, every PDA is addressable, every escrow has a story. It pairs that UX with a serious Solana program: PDAs, CPIs, events, custom errors, and SPL escrows via associated token accounts. It's built to feel like an early-stage fintech, not a tutorial fork.
 
