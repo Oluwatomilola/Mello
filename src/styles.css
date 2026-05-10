@@ -144,8 +144,46 @@
     border-color: var(--color-border);
   }
 
-  body {
-    background-color: var(--color-background);
+  html, body {
+    background: var(--gradient-hero);
+    background-attachment: fixed;
     color: var(--color-foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+  }
+  .glow-card {
+    background: linear-gradient(180deg, oklch(1 0 0 / 5%), oklch(1 0 0 / 2%));
+    border: 1px solid oklch(1 0 0 / 8%);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-glow);
+  }
+  .text-gradient-emerald {
+    background: var(--gradient-emerald);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-violet {
+    background: var(--gradient-violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn-hero {
+    background: var(--gradient-emerald);
+    color: var(--primary-foreground);
+    box-shadow: 0 10px 40px -10px oklch(0.74 0.17 158 / 50%);
+  }
+  .btn-hero:hover { filter: brightness(1.08); }
+}
+
