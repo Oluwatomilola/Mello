@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { LiFiWidget, WidgetConfig } from '@lifi/widget';
 import { NavBar } from '@/components/NavBar';
+import { ClientOnly } from '@/components/ClientOnly';
 import { ShoppingCart, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 
@@ -82,9 +83,11 @@ function PayComponent() {
         </div>
 
         {/* Widget */}
-        <div className="w-full max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl ring-1 ring-white/10 backdrop-blur-xl bg-slate-900/50">
-          <LiFiWidget integrator="Mellocoin" config={widgetConfig} />
-        </div>
+        <ClientOnly fallback={<div className="w-full max-w-[480px] rounded-[32px] h-96 bg-slate-900/50 animate-pulse" />}>
+          <div className="w-full max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl ring-1 ring-white/10 backdrop-blur-xl bg-slate-900/50">
+            <LiFiWidget integrator="Mellocoin" config={widgetConfig} />
+          </div>
+        </ClientOnly>
 
       </main>
     </div>

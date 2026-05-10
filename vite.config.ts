@@ -24,11 +24,8 @@ export default defineConfig({
     ],
     build: {
       rollupOptions: {
-        external: ["@bigmi/react", "@mysten/dapp-kit", "@mysten/sui", "@mysten/sui.js"],
+        external: ["@bigmi/react", "@mysten/dapp-kit", "@mysten/sui", "@mysten/sui.js", "@lifi/widget"],
       },
-    },
-    ssr: {
-      external: ["@bigmi/react", "@mysten/dapp-kit", "@mysten/sui", "@mysten/sui.js", "@lifi/widget"],
     },
   },
 });

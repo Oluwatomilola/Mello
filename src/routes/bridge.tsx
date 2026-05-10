@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { LiFiWidget, WidgetConfig } from '@lifi/widget';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { NavBar } from '@/components/NavBar';
+import { ClientOnly } from '@/components/ClientOnly';
 
 export const Route = createFileRoute('/bridge')({
   component: BridgeComponent,
@@ -44,9 +45,11 @@ function BridgeComponent() {
           </p>
         </div>
 
-        <div className="w-full max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl ring-1 ring-white/10 backdrop-blur-xl bg-slate-900/50 relative z-10">
-          <LiFiWidget integrator="Mellocoin" config={widgetConfig} />
-        </div>
+        <ClientOnly fallback={<div className="w-full max-w-[480px] rounded-[32px] h-96 bg-slate-900/50 animate-pulse" />}>
+          <div className="w-full max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl ring-1 ring-white/10 backdrop-blur-xl bg-slate-900/50 relative z-10">
+            <LiFiWidget integrator="Mellocoin" config={widgetConfig} />
+          </div>
+        </ClientOnly>
       </main>
     </div>
   );
