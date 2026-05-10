@@ -22,5 +22,10 @@ export default defineConfig({
         },
       }),
     ],
+    build: {
+      rollupOptions: {
+        external: ["@bigmi/react"],
+      },
+    },
   },
 });
